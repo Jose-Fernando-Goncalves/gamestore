@@ -4,6 +4,18 @@ Loja de jogos fictícia full-stack: vitrine em **React 19 + Vite + Tailwind** co
 backend **Node (Express) + SQLite** que cobre catálogo, autenticação (user/admin),
 biblioteca do usuário e pedidos.
 
+**🔗 Demo:** [gamestore-amber-rho.vercel.app](https://gamestore-amber-rho.vercel.app)
+
+## Screenshots
+
+![Hero + Navbar](screenshots/screenshot-1.png)
+![Game Grid + Deal Banner](screenshots/screenshot-2.png)
+![Topic Carousels](screenshots/screenshot-3.png)
+![Retro Deals + Genres](screenshots/screenshot-4.png)
+![Newsletter + Footer](screenshots/screenshot-5.png)
+![Admin — Dashboard](screenshots/screenshot-6.png)
+![Admin — Catálogo](screenshots/screenshot-7.png)
+
 ## Stack
 
 | Camada    | Tecnologias                                                        |
