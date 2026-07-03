@@ -27,9 +27,6 @@ cp .env.example .env      # e ajuste o JWT_SECRET (veja abaixo)
 npm run dev:full          # web (Vite :5173) + api (Express :3001)
 ```
 
-Em dev o Vite faz **proxy** de `/api → http://localhost:3001`, então não há CORS no
-navegador. Abra o endereço que o Vite imprimir (normalmente http://localhost:5173).
-
 ### Scripts
 
 | Script              | O que faz                                            |
@@ -47,24 +44,7 @@ SQLite em `server/data/hallow.db` (gitignored). No primeiro boot, o servidor rod
 **seed** automaticamente: importa o catálogo de `src/data/gamesData.js` (~50 jogos) e
 cria um usuário admin. Para recriar do zero, apague o arquivo `.db` e rode `npm run seed`.
 
-## Variáveis de ambiente (`.env`)
-
-```ini
-PORT=3001
-JWT_SECRET=...                 # troque por um valor longo e aleatório
-ADMIN_NAME=Admin HALLOW
-ADMIN_EMAIL=admin@hallow.gg
-ADMIN_PASSWORD=admin123
-```
-
-Gere um segredo forte:
-```bash
-node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
-```
-
 **Admin padrão:** `admin@hallow.gg` / `admin123` (mude no `.env` antes do primeiro seed).
-
-## Dois modos: full-stack (local) x demo mockado (Vercel)
 
 O front tem uma camada de dados que alterna entre o backend real e um mock em
 localStorage, controlada pela flag de build `VITE_MOCK`:
@@ -72,20 +52,10 @@ localStorage, controlada pela flag de build `VITE_MOCK`:
 | Cenário | Comando | Dados |
 |---------|---------|-------|
 | **Local / GitHub** (full-stack) | `npm run dev:full` | API Express + SQLite reais |
-| **Demo / Vercel** (sem backend)  | `npm run build` (usa `.env.production`) | mock em localStorage |
 
 - Em **dev** a flag fica desligada → tudo bate na API real (auth/JWT, admin, biblioteca,
   pedidos). É assim que quem clona o repo testa o backend.
-- No **build de produção**, `.env.production` define `VITE_MOCK=true` e o app passa a
-  usar `src/data/apiMock.js`: nenhuma chamada de rede, cada visitante tem seus próprios
-  dados (resetáveis limpando o localStorage do navegador). O admin de demo é o mesmo:
   `admin@hallow.gg` / `admin123`.
-
-### Deploy no Vercel
-
-Importe o repositório no Vercel — o preset **Vite** é detectado automaticamente
-(`vercel.json` cuida do fallback de SPA). O build roda `vite build`, que carrega
-`.env.production` e sobe em modo mock. Nenhuma variável de ambiente extra é necessária.
 
 ## API
 
